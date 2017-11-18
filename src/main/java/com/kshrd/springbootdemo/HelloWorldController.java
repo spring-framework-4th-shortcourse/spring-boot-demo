@@ -1,16 +1,24 @@
 package com.kshrd.springbootdemo;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.kshrd.springbootdemo.model.User;
 
 @Controller
 public class HelloWorldController {
 
 	@RequestMapping(value = {"/", "/home", "/index"})
-	public String indexPage(){
+	public String indexPage(Model model){
 		System.out.println("Hello");
+		model.addAttribute("message", "Hello World!!!!");
+		
+		User user = new User(100, "Dara", "Male", "Dara.jpg");
+		model.addAttribute("user", user);
+		
 		return "index";
 	}
 	

@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1"/>
-<title>Insert title here</title>
-<link rel="stylesheet" href="/assets/index.css"/>
-</head>
-<body>
-	<h1>Hello World!</h1>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="ISO-8859-1"/>
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="/assets/index.css"/>
+	<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	</head>
+	<body>
+		<h1 th:text="#{message}">Hello</h1>
+		
+		<h2 th:text="${user}"></h2>
+		
+		<ul>
+			<li th:text="${user.id}"></li>
+			<li th:text="${user.name}"></li>
+			<li th:text="${user.gender}"></li>
+			<li th:text="${user.image}"></li>
+		</ul>
+		
+		<ul th:object="${user}">
+			<li th:text="*{id}"></li>
+			<li th:text="*{name}"></li>
+			<li th:text="*{gender}"></li>
+			<li th:text="*{image}"></li>
+		</ul>
+		
+	</body>
 </html>
