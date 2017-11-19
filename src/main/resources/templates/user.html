@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>User Page</title>
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+	
+	<div class="container">
+		<!-- <ul th:each="user : ${users}">
+			<li th:text="${user.gender}"></li>
+		</ul> -->
+		<h2>User List</h2><hr/>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Username</th>
+					<th>Gender</th>
+					<th>Image</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody th:each="user: ${users}">
+				<tr>
+					<td th:text="${user.id}">1</td>
+					<td th:text="${user.name}">A</td>
+					<td th:text="${user.gender=='F'?'Female':'Male'}">
+						<!-- 
+						<span th:if="${user.gender=='M'}">Male</span>
+						<span th:unless="${user.gender=='M'}">Female</span>
+						
+						<div th:switch="${user.gender}">
+							<span th:case="'F'">Female</span>
+							<span th:case="'M'">Male</span>
+						</div>
+						 -->
+					</td>
+					<td th:text="${user.image}">1.jpg</td>
+					<td><a th:href="@{/user/{id}(id=${user.id})}">Detail</a></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+	
+	
+</body>
+</html>
