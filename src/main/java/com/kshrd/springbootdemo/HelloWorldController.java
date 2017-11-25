@@ -1,4 +1,4 @@
-package com.kshrd.springbootdemo;
+/*package com.kshrd.springbootdemo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,18 +36,19 @@ public class HelloWorldController {
 		return "Hello World!";
 	}
 	
-	/*@ResponseBody
+	@ResponseBody
 	@RequestMapping("/user")  // /user?name=Dara
 	public String home(@RequestParam(name = "name", required=false, defaultValue="Default") String name){
 		System.out.println(name);
 		return name;
-	}*/
+	}
 	
-	/*@ResponseBody
+	@ResponseBody
 	@RequestMapping("/user/{name}")  
 	public String home(@PathVariable("name") String name){
 		System.out.println(name);
 		return name;
-	}*/
+	}
 	
 }
+*/

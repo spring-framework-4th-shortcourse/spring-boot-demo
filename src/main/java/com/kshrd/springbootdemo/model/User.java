@@ -6,6 +6,9 @@ public class User {
 	private String gender;
 	private String image;
 	
+	public User() {
+	
+	}
 	public User(int id, String name, String gender, String image) {
 		super();
 		this.id = id;

@@ -12,6 +12,9 @@
 			<li th:text="${user.gender}"></li>
 		</ul> -->
 		<h2>User List</h2><hr/>
+		
+		<a class="btn btn-primary" href="/user/add">Add User</a>
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -38,7 +41,11 @@
 						 -->
 					</td>
 					<td th:text="${user.image}">1.jpg</td>
-					<td><a th:href="@{/user/{id}(id=${user.id})}">Detail</a></td>
+					<td>
+						<a th:href="@{/user/{id}(id=${user.id})}">Detail</a>
+						<a th:href="@{/user/remove(id=${user.id})}">Remove</a>
+						<a th:href="@{/user/edit(id=${user.id})}">Edit</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
