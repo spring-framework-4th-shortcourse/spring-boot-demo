@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kshrd.springbootdemo.model.User;
@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/user")
+	@GetMapping("/user") // = @RequestMapping(value = "/user")
 	public String userPage(Model model){
 		
 		List<User> users = userService.findAll();
@@ -28,41 +28,44 @@ public class UserController {
 		return "user/user";
 	}
 	
-	@RequestMapping(value="/user/{id}")
+	@GetMapping("/user/{id}") //@RequestMapping(value="/user/{id}")
 	public String userDetail(@PathVariable("id") Integer id, Model model){
 		User user = userService.findById(id);
 		model.addAttribute("userdetail", user);
 		return "user/userdetail";
 	}
 		
-	@RequestMapping(value = "/user/add")
-	public String userAddPage(){
+	@GetMapping("/user/add") //@RequestMapping(value = "/user/add")
+	public String userAddPage(Model model){
+		model.addAttribute("addStatus", true);
+		model.addAttribute("user", new User());
 		return "user/adduser";
 	}
 	
-	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
+	@PostMapping("/user/add")// = @RequestMapping(value = "/user/add", method = RequestMethod.POST)
 	public String actionAddUser(User user){
 		System.out.println(user);
 		userService.save(user);
-		return "redirect:/user";
+		return "redirect:/user";	
 	}
 	
-	@RequestMapping(value = "/user/remove")
+	@PostMapping("/user/remove") //@RequestMapping(value = "/user/remove", method = RequestMethod.POST)
 	public String removeUser(@RequestParam("id") Integer id){
 		System.out.println("Id: " + id);
 		userService.remove(id);
 		return "redirect:/user";
 	}
 	
-	@RequestMapping(value = "/user/edit")
+	@GetMapping("/user/edit") //@RequestMapping(value = "/user/edit")
 	public String editUser(Model model, @RequestParam("id") Integer id){
 		System.out.println("Id: " + id);
 		User user = userService.findById(id);
 		model.addAttribute("user", user);
-		return "user/edituser";
+		model.addAttribute("addStatus", false);
+		return "user/adduser";
 	}
 	
-	@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	@PostMapping("/user/update") //@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public String updateUser(User user){
 		System.out.println(user);
 		userService.update(user);

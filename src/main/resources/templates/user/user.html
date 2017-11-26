@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1"/>
+<meta charset="ISO-8859-1">
 <title>User Page</title>
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
@@ -40,18 +40,22 @@
 						</div>
 						 -->
 					</td>
-					<td th:text="${user.image}">1.jpg</td>
+					<td>
+						<img th:src="${user.image}"/>
+					</td>
 					<td>
 						<a th:href="@{/user/{id}(id=${user.id})}">Detail</a>
-						<a th:href="@{/user/remove(id=${user.id})}">Remove</a>
+						
+						<form th:action="@{/user/remove(id=${user.id})}" method="post">
+							<input type="submit" value="Remove"/>
+						</form>
+						
+						<!-- <a th:href="@{/user/remove(id=${user.id})}">Remove</a> -->
 						<a th:href="@{/user/edit(id=${user.id})}">Edit</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		
 	</div>
-	
-	
 </body>
 </html>
