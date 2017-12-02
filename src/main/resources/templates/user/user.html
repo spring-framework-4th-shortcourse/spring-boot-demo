@@ -2,60 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>User Page</title>
+<title>User List</title>
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 </head>
 <body>
 	
 	<div class="container">
-		<!-- <ul th:each="user : ${users}">
-			<li th:text="${user.gender}"></li>
-		</ul> -->
-		<h2>User List</h2><hr/>
-		
-		<a class="btn btn-primary" href="/user/add">Add User</a>
-		
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Username</th>
-					<th>Gender</th>
-					<th>Image</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody th:each="user: ${users}">
-				<tr>
-					<td th:text="${user.id}">1</td>
-					<td th:text="${user.name}">A</td>
-					<td th:text="${user.gender=='F'?'Female':'Male'}">
-						<!-- 
-						<span th:if="${user.gender=='M'}">Male</span>
-						<span th:unless="${user.gender=='M'}">Female</span>
-						
-						<div th:switch="${user.gender}">
-							<span th:case="'F'">Female</span>
-							<span th:case="'M'">Male</span>
-						</div>
-						 -->
-					</td>
-					<td>
-						<img th:src="${user.image}"/>
-					</td>
-					<td>
-						<a th:href="@{/user/{id}(id=${user.id})}">Detail</a>
-						
-						<form th:action="@{/user/remove(id=${user.id})}" method="post">
-							<input type="submit" value="Remove"/>
-						</form>
-						
-						<!-- <a th:href="@{/user/remove(id=${user.id})}">Remove</a> -->
-						<a th:href="@{/user/edit(id=${user.id})}">Edit</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<h2 th:text="#{Page.user.user.title}">User List</h2><hr/>
+		<a class="btn btn-primary" href="/user/add">Create User</a>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Username</th>
+						<th>Gender</th>
+						<th>Image</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody th:each="user: ${users}">
+					<tr>
+						<td th:text="${user.id}">1</td>
+						<td th:text="${user.name}">A</td>
+						<td th:text="${user.gender=='F'?'Female':'Male'}"></td>
+						<td>
+							<img th:src="${user.image}"/>
+						</td>
+						<td>
+							<form th:action="@{/user/remove}" th:method="delete">
+								<!-- <input type="hidden" name="_method" value="DELETE"> -->
+								<a class="btn btn-default" th:href="@{/user/{id}(id=${user.id})}">View</a>
+								<span>
+									<input type="hidden" name="id" th:value="${user.id}"/> 
+									<input class="btn btn-danger" type="submit" value="Remove"/>
+								</span>
+								<a class="btn btn-warning" th:href="@{/user/edit(id=${user.id})}">Edit</a>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 	</div>
 </body>
 </html>

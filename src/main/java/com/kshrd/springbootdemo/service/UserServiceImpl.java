@@ -9,41 +9,41 @@ import com.kshrd.springbootdemo.model.User;
 import com.kshrd.springbootdemo.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Override
-	public List<User> findAll() {
+	public List<User> findAllUsers() {
 		return userRepository.findAll();
 	}
 
 	@Override
-	public User findById(Integer id) {
+	public User searchById(Integer id) {
 		return userRepository.findById(id);
 	}
 
 	@Override
-	public void save(User user) {
+	public void createUser(User user) {
 		boolean status = userRepository.save(user);
-		if(status)
+		if (status)
 			System.out.println("-> Added Successfully!");
 		else
 			System.out.println("-> Added Fail!");
 	}
 
 	@Override
-	public void remove(Integer id) {
-		if(userRepository.remove(id))
+	public void removeUser(Integer id) {
+		if (userRepository.remove(id))
 			System.out.println("-> Removed Successfully!");
 		else
 			System.out.println("-> Remove Fail!");
 	}
 
 	@Override
-	public void update(User user) {
-		if(userRepository.update(user))
+	public void updateUser(User user) {
+		if (userRepository.update(user))
 			System.out.println("-> Updated Successfully!");
 		else
 			System.out.println("-> Update Fail!");

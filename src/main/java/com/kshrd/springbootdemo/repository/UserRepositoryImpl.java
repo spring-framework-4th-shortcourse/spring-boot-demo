@@ -10,9 +10,9 @@ import com.kshrd.springbootdemo.model.User;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
-	
+
 	private List<User> users = new ArrayList<>();
-	
+
 	public UserRepositoryImpl() {
 		Faker faker = new Faker();
 		for (int i = 0; i < 10; i++) {
@@ -44,8 +44,8 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public boolean remove(Integer id) {
-		for(int i=0; i<users.size(); i++){
-			if(users.get(i).getId() == id){
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == id) {
 				users.remove(i);
 				return true;
 			}
@@ -55,8 +55,8 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public boolean update(User user) {
-		for(int i=0; i<users.size(); i++){
-			if(users.get(i).getId() == user.getId()){
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getId() == user.getId()) {
 				users.set(i, user);
 				return true;
 			}

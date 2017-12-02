@@ -7,18 +7,20 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class User {
 	
 	private int id;
-	
+
 	@NotEmpty(message = "User name cannot be empty!")
+	@Size(min = 10, max = 30, message = "User name must be between {2} and {1} characters!")
 	private String name;
-	
-	@Size(min=5, max=10, message = "Gender must be one character long!")
+
+	@Size(min = 1, max = 1, message = "Gender must be one character long!")
 	private String gender;
-	
+
+	@NotEmpty(message = "Image can't be empty!")
 	private String image;
-	
+
 	public User() {
-	
 	}
+
 	public User(int id, String name, String gender, String image) {
 		super();
 		this.id = id;

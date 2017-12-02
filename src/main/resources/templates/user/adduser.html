@@ -2,14 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1"/>
-<title th:text="${addStatus?'Add User Page': 'Update User Page'}">Add User Page</title>
+<title th:text="${addStatus?'Create User Page': 'Update User Page'}">Create User Page</title>
 <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="/assets/css/index.css"/>
 </head>
 <body>
 	<div class="container">
-		<h2 th:text="${addStatus==true?'Add User':'Update User' }"></h2><hr>
+		<h2 th:text="${addStatus==true?'Create User':'Update User' }"></h2><hr>
 		<form th:action="${addStatus==true?'/user/add':'/user/update'}" method="post" th:object="${user}"> 
+			<ul>
+				<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+			</ul>
 			<div class="form-group">
 				<label>Id:</label><input type="number" class="form-control" th:field="*{id}"/>
 				<span class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Error Id</span>
@@ -26,7 +29,10 @@
 				<label>Image:</label> <input type="text" class="form-control" th:field="*{image}"/>
 				<span class="error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Error Image</span>
 			</div>
-			<button type="submit" class="btn btn-default" th:text="${addStatus==true?'Add User': 'Update User'}">Add User</button>
+			<div class="pull-right">
+				<a href="/" class="btn btn-default">Cancel</a>
+				<button type="submit" class="btn btn-primary" th:text="${addStatus==true?'Create User': 'Update User'}">Create User</button>
+			</div>
 		</form>
 	</div>
 </body>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +24,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/user") // = @RequestMapping(value = "/user")
+	@GetMapping(value = {"/", "/user"}) // = @RequestMapping(value = "/user")
 	public String userPage(Model model){
 		
-		List<User> users = userService.findAll();
+		List<User> users = userService.findAllUsers();
 		
 		model.addAttribute("users", users);
 		return "user/user";
@@ -34,9 +35,9 @@ public class UserController {
 	
 	@GetMapping("/user/{id}") //@RequestMapping(value="/user/{id}")
 	public String userDetail(@PathVariable("id") Integer id, Model model){
-		User user = userService.findById(id);
+		User user = userService.searchById(id);
 		model.addAttribute("userdetail", user);
-		return "user/userdetail";
+		return "user/user-detail";
 	}
 		
 	@GetMapping("/user/add") //@RequestMapping(value = "/user/add")
@@ -57,21 +58,21 @@ public class UserController {
 			return "/user/adduser"; 
 		}
 		System.out.println(user);
-		userService.save(user);
+		userService.createUser(user);
 		return "redirect:/user";	
 	}
 	
-	@PostMapping("/user/remove") //@RequestMapping(value = "/user/remove", method = RequestMethod.POST)
+	@DeleteMapping("/user/remove") //@RequestMapping(value = "/user/remove", method = RequestMethod.POST)
 	public String removeUser(@RequestParam("id") Integer id){
 		System.out.println("Id: " + id);
-		userService.remove(id);
+		userService.removeUser(id);
 		return "redirect:/user";
 	}
 	
 	@GetMapping("/user/edit") //@RequestMapping(value = "/user/edit")
 	public String editUser(Model model, @RequestParam("id") Integer id){
 		System.out.println("Id: " + id);
-		User user = userService.findById(id);
+		User user = userService.searchById(id);
 		model.addAttribute("user", user);
 		model.addAttribute("addStatus", false);
 		return "user/adduser";
@@ -80,7 +81,7 @@ public class UserController {
 	@PostMapping("/user/update") //@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public String updateUser(User user){
 		System.out.println(user);
-		userService.update(user);
+		userService.updateUser(user);
 		return "redirect:/user";
 	}
 }

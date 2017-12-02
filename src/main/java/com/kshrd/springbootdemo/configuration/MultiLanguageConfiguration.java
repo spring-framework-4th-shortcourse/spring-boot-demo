@@ -13,7 +13,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
-public class AppConfiguration extends WebMvcConfigurerAdapter{
+public class MultiLanguageConfiguration extends WebMvcConfigurerAdapter{
 	
 	//change default message location
 	@Bean
@@ -31,7 +31,6 @@ public class AppConfiguration extends WebMvcConfigurerAdapter{
 		slr.setDefaultLocale(new Locale("kh"));
 		return slr;
 	}
-	
 
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor(){
