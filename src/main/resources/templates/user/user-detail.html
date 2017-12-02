@@ -1,16 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1"/>
-<title th:text="#{Page.user.user-detail.title}">User Detail</title>
-<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<meta charset="uft-8"/>
+	<title th:text="#{Page.user.user-detail.title}">User Detail</title>
+	<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/assets/css/index.css"/>
 </head>
 <body>
-	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">User Management System</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="#">Sign up</a></li>
+				<li><a href="#">Login</a></li>
+			</ul>
+		</div>
+	</nav>
+
 	<div class="container">
-		<h2 th:text="#{Page.user.user-detail.title}">User Detail</h2><hr/>
-		<h4 th:text="${userdetail}"></h4>
+		<div class="alert alert-info">
+			<h2 th:text="#{Page.user.user-detail.title}">User Detail</h2><hr/>
+			<a class="btn btn-primary" href="/">Return Home</a>
+		</div>
+		<table th:object="${userdetail}">
+			<tr>
+				<td><h2>Id:</h2></td>
+				<td><h2 th:text="*{id}"></h2></td>
+			</tr>
+			<tr>
+				<td><h2>Name:</h2></td>
+				<td><h2 th:text="*{name}"></h2></td>
+			</tr>
+			<tr>
+				<td><h2>Gender:<h2/></td>
+				<td><h2 th:text="*{gender=='F'?'Female':'Male'}"></h2></td>
+			</tr>
+			<tr>
+				<td><h2>Image:</h2></td>
+				<td><h2 th:text="*{image}"></h2></td>
+			</tr>
+		</table>
+
 	</div>
-	
+
+	<!--Footer-->
+	<footer class="page-footer">
+		<div class="footer-copyright">
+			<div class="container-fluid">
+				© 2017 Copyright: SpringFramework@HRD
+			</div>
+		</div>
+	</footer>
+	<!--/Footer-->
+
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"/>
+	<script src="/webjars/jquery/1.11.1/jquery.min.js"/>
 </body>
 </html>

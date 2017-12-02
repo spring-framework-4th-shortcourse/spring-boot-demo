@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>User List</title>
-<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<meta charset="utf-8">
+	<title>User List</title>
+	<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/assets/css/index.css"/>
 </head>
 <body>
-	
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">User Management System</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="#">Sign up</a></li>
+				<li><a href="#">Login</a></li>
+			</ul>
+		</div>
+	</nav>
+
 	<div class="container">
-		<h2 th:text="#{Page.user.user.title}">User List</h2><hr/>
-		<a class="btn btn-primary" href="/user/add">Create User</a>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Id</th>
-						<th>Username</th>
-						<th>Gender</th>
-						<th>Image</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody th:each="user: ${users}">
-					<tr>
-						<td th:text="${user.id}">1</td>
-						<td th:text="${user.name}">A</td>
-						<td th:text="${user.gender=='F'?'Female':'Male'}"></td>
-						<td>
-							<img th:src="${user.image}"/>
-						</td>
-						<td>
-							<form th:action="@{/user/remove}" th:method="delete">
-								<!-- <input type="hidden" name="_method" value="DELETE"> -->
-								<a class="btn btn-default" th:href="@{/user/{id}(id=${user.id})}">View</a>
-								<span>
-									<input type="hidden" name="id" th:value="${user.id}"/> 
-									<input class="btn btn-danger" type="submit" value="Remove"/>
-								</span>
-								<a class="btn btn-warning" th:href="@{/user/edit(id=${user.id})}">Edit</a>
-							</form>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="alert alert-info">
+			<h2 th:text="#{Page.user.user.title}">User List</h2><hr/>
+			<a class="btn btn-primary" href="/user/add">Create User</a>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Username</th>
+					<th>Gender</th>
+					<th>Image</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody th:each="user: ${users}">
+				<tr>
+					<td th:text="${user.id}">1</td>
+					<td th:text="${user.name}">A</td>
+					<td th:text="${user.gender=='F'?'Female':'Male'}"></td>
+					<td th:text="${user.image}">
+						<!--<img th:src="${user.image}"/>-->
+					</td>
+					<td>
+						<form th:action="@{/user/remove}" th:method="delete">
+							<!-- <input type="hidden" name="_method" value="DELETE"> -->
+							<a class="btn btn-default" th:href="@{/user/{id}(id=${user.id})}">View</a>
+							<span>
+								<input type="hidden" name="id" th:value="${user.id}"/>
+								<input class="btn btn-danger" type="submit" value="Remove"/>
+							</span>
+							<a class="btn btn-warning" th:href="@{/user/edit(id=${user.id})}">Edit</a>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
+
+	<!--Footer-->
+	<footer class="page-footer">
+		<div class="footer-copyright">
+			<div class="container-fluid">
+				© 2017 Copyright: SpringFramework@HRD
+			</div>
+		</div>
+	</footer>
+	<!--/Footer-->
+
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"/>
+	<script src="/webjars/jquery/1.11.1/jquery.min.js"/>
 </body>
 </html>

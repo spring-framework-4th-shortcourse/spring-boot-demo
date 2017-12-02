@@ -28,7 +28,7 @@ public class MultiLanguageConfiguration extends WebMvcConfigurerAdapter{
 	@Bean 
 	public LocaleResolver localeResolver(){
 		SessionLocaleResolver slr = new SessionLocaleResolver();
-		slr.setDefaultLocale(new Locale("kh"));
+		slr.setDefaultLocale(new Locale("en"));
 		return slr;
 	}
 

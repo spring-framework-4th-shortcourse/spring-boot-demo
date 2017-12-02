@@ -79,7 +79,16 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/update") //@RequestMapping(value = "/user/update", method = RequestMethod.POST)
-	public String updateUser(User user){
+	public String updateUser(Model model, @Valid User user, BindingResult result){
+		if(result.hasErrors()){
+			for(FieldError error: result.getFieldErrors()){
+				System.out.println(error.getField() +": "+ error.getDefaultMessage());
+			}
+			model.addAttribute("addStatus", false);
+			model.addAttribute("user", user);
+			return "/user/adduser";
+		}
+
 		System.out.println(user);
 		userService.updateUser(user);
 		return "redirect:/user";
