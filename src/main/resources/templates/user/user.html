@@ -15,7 +15,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li>
-				<li><a href="#">Sign up</a></li>
+				<li><a href="/user/add">Create User</a></li>
 				<li><a href="#">Login</a></li>
 			</ul>
 		</div>
@@ -29,7 +29,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Id</th>
+					<th>No</th>
 					<th>Username</th>
 					<th>Gender</th>
 					<th>Image</th>
@@ -38,7 +38,7 @@
 			</thead>
 			<tbody th:each="user: ${users}">
 				<tr>
-					<td th:text="${user.id}">1</td>
+					<td th:text="${userStat.index}">1</td>
 					<td th:text="${user.name}">A</td>
 					<td th:text="${user.gender=='F'?'Female':'Male'}"></td>
 					<td th:text="${user.image}">
