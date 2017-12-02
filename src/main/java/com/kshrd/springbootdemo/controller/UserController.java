@@ -2,9 +2,13 @@ package com.kshrd.springbootdemo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +47,15 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/add")// = @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-	public String actionAddUser(User user){
+	public String actionAddUser(Model model, @Valid User user, BindingResult result){
+		if(result.hasErrors()){
+			for(FieldError error: result.getFieldErrors()){
+				System.out.println(error.getField() +": "+ error.getDefaultMessage());
+			}
+			model.addAttribute("addStatus", true);
+			model.addAttribute("user", user);
+			return "/user/adduser"; 
+		}
 		System.out.println(user);
 		userService.save(user);
 		return "redirect:/user";	

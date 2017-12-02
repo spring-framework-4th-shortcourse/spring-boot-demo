@@ -1,9 +1,19 @@
 package com.kshrd.springbootdemo.model;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class User {
+	
 	private int id;
+	
+	@NotEmpty(message = "User name cannot be empty!")
 	private String name;
+	
+	@Size(min=5, max=10, message = "Gender must be one character long!")
 	private String gender;
+	
 	private String image;
 	
 	public User() {
