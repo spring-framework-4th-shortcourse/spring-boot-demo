@@ -38,11 +38,11 @@
 			</thead>
 			<tbody th:each="user: ${users}">
 				<tr>
-					<td th:text="${userStat.index}">1</td>
+					<td th:text="${userStat.index+1}">1</td>
 					<td th:text="${user.name}">A</td>
 					<td th:text="${user.gender=='F'?'Female':'Male'}"></td>
-					<td th:text="${user.image}">
-						<!--<img th:src="${user.image}"/>-->
+					<td>
+						<img th:src="${user.image}" width="100px"/>
 					</td>
 					<td>
 						<form th:action="@{/user/remove}" th:method="delete">

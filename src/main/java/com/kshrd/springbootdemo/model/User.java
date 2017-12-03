@@ -15,7 +15,7 @@ public class User {
 	@Size(min = 1, max = 1, message = "Gender must be one character long!")
 	private String gender;
 
-	@NotEmpty(message = "Image can't be empty!")
+	//@NotEmpty(message = "Image can't be empty!")
 	private String image;
 
 	public User() {
