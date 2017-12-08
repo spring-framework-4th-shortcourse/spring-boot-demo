@@ -1,33 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layouts/default">
 <head>
 	<meta charset="uft-8"/>
 	<title th:text="${addStatus?'Create User Page': 'Update User Page'}">Create User Page</title>
-	<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="/assets/css/index.css"/>
 </head>
 <body>
 
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/">User Management System</a>
-			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">Home</a></li>
-				<li><a href="/user/add">Create User</a></li>
-				<li><a href="#">Login</a></li>
-			</ul>
-		</div>
-	</nav>
-
-	<div class="container">
+	<div class="container" layout:fragment="content">
 		<div class="alert alert-info">
 			<h2 th:text="${addStatus==true?'Create User':'Update User' }"></h2><hr>
 			<a class="btn btn-primary" href="/">Return Home</a>
 		</div>
 
-		<form th:action="${addStatus==true?'/user/add':'/user/update'}" method="post" th:object="${user}">
+		<form th:action="${addStatus==true?'/user/add':'/user/update'}" method="post" th:object="${user}" enctype="multipart/form-data">
 			<label th:if="${#fields.hasErrors('*')}" th:text="'Errors: '">Errors: </label>
 			<ul>
 				<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
@@ -45,8 +32,10 @@
 				<span class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Error Gender</span>
 			</div>
 			<div class="form-group">
-				<label>Image:</label> <input type="text" class="form-control" th:field="*{image}" placeholder="Enter Image"/>
-				<span class="error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Error Image</span>
+				<label>Image:</label> 
+				<input type="file" name="file"/>
+				<input type="hidden" class="form-control" th:field="*{image}" placeholder="Enter Image"/>
+				<!-- <span class="error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Error Image</span> -->
 			</div>
 			<div class="pull-right">
 				<a href="/" class="btn btn-default">Cancel</a>
@@ -55,17 +44,5 @@
 		</form>
 	</div>
 
-	<!--Footer-->
-	<footer class="page-footer">
-		<div class="footer-copyright">
-			<div class="container-fluid">
-				© 2017 Copyright: SpringFramework@HRD
-			</div>
-		</div>
-	</footer>
-	<!--/Footer-->
-
-	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"/>
-	<script src="/webjars/jquery/1.11.1/jquery.min.js"/>
 </body>
 </html>

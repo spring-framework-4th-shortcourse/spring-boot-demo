@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="utf-8">
+
+        <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">UMS</title>
+
+        <!--Style-->
+        <th:block th:replace="fragments/style"></th:block>
+        <!--/Style-->
+    </head>
+    <body>
+
+        <!--Navbar-->
+        <nav class="navbar navbar-default" th:replace="fragments/header :: header"></nav>
+        <!--/Navbar-->
+
+        <!--Body-->
+        <div class="container" layout:fragment="content">
+            <!--Render Content Here-->
+            <h1>Hello From Layout</h1>
+        </div>
+        <!--/Body-->
+
+        <!--Footer-->
+        <footer class="page-footer" th:replace="fragments/footer :: footer"></footer>
+        <!--/Footer-->
+
+        <!--Script-->
+        <th:block th:replace="fragments/script"></th:block>
+        <!--/Script-->
+
+    </body>
+</html>
