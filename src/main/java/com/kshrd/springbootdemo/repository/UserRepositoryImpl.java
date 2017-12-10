@@ -1,4 +1,4 @@
-package com.kshrd.springbootdemo.repository;
+/*package com.kshrd.springbootdemo.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.github.javafaker.Faker;
 import com.kshrd.springbootdemo.model.User;
+import com.mifmif.common.regex.Main;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -63,4 +64,16 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 		return false;
 	}
+	public static void main(String[] args) {
+		Faker faker = new Faker();
+		for (int i = 0; i < 20; i++) {
+			String name = faker.name().fullName();
+			String image = faker.internet().image(100, 100, false, null);
+			System.out.println(String.
+					format("insert into tbuser(id, name, gender) values(%s, '%s', '%s', '%s');", i, name, (i > 5) ? "M" : "F", image));
+			
+		}
+	}
+	
 }
+*/

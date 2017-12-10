@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kshrd.springbootdemo.model.User;
-import com.kshrd.springbootdemo.repository.UserRepository;
+import com.kshrd.springbootdemo.repository.MybatisUserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private MybatisUserRepository userRepository;
 
 	@Override
 	public List<User> findAllUsers() {

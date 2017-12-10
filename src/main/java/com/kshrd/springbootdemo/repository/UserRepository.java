@@ -1,4 +1,4 @@
-package com.kshrd.springbootdemo.repository;
+/*package com.kshrd.springbootdemo.repository;
 
 import java.util.List;
 
@@ -16,3 +16,4 @@ public interface UserRepository {
 
 	public boolean update(User user);
 }
+*/
