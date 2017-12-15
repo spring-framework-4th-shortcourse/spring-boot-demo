@@ -1,4 +1,4 @@
-insert into tbuser(id, name, gender, image) values(0, 'Haylee Kemmer', 'F', 'http://lorempixel.com/100/100/animals/');
+-- USER
 insert into tbuser(id, name, gender, image) values(1, 'Isabella Weber II', 'F', 'http://lorempixel.com/100/100/nightlife/');
 insert into tbuser(id, name, gender, image) values(2, 'River Beahan', 'F', 'http://lorempixel.com/100/100/people/');
 insert into tbuser(id, name, gender, image) values(3, 'Bernadette Koelpin', 'F', 'http://lorempixel.com/100/100/city/');
@@ -9,12 +9,24 @@ insert into tbuser(id, name, gender, image) values(7, 'Eduardo Homenick', 'M', '
 insert into tbuser(id, name, gender, image) values(8, 'Rachael Kris', 'M', 'http://lorempixel.com/100/100/animals/');
 insert into tbuser(id, name, gender, image) values(9, 'Mr. Cleo Rogahn', 'M', 'http://lorempixel.com/100/100/technics/');
 insert into tbuser(id, name, gender, image) values(10, 'Sam Konopelski', 'M', 'http://lorempixel.com/100/100/cats/');
-insert into tbuser(id, name, gender, image) values(11, 'Lillie Bartoletti', 'M', 'http://lorempixel.com/100/100/fashion/');
-insert into tbuser(id, name, gender, image) values(12, 'Frances Kub', 'M', 'http://lorempixel.com/100/100/animals/');
-insert into tbuser(id, name, gender, image) values(13, 'Hollis Glover', 'M', 'http://lorempixel.com/100/100/city/');
-insert into tbuser(id, name, gender, image) values(14, 'Cheyenne Emmerich', 'M', 'http://lorempixel.com/100/100/nightlife/');
-insert into tbuser(id, name, gender, image) values(15, 'Maymie Ledner III', 'M', 'http://lorempixel.com/100/100/business/');
-insert into tbuser(id, name, gender, image) values(16, 'Kimberly Barton', 'M', 'http://lorempixel.com/100/100/city/');
-insert into tbuser(id, name, gender, image) values(17, 'Bernard Morissette', 'M', 'http://lorempixel.com/100/100/animals/');
-insert into tbuser(id, name, gender, image) values(18, 'Nathan Dibbert MD', 'M', 'http://lorempixel.com/100/100/technics/');
-insert into tbuser(id, name, gender, image) values(19, 'Ms. Simone Johnson', 'M', 'http://lorempixel.com/100/100/cats/');
+
+-- ROLE
+insert into tbrole(id, role) values(11, 'USER');
+insert into tbrole(id, role) values(12, 'ADMIN');
+
+-- USER'S ROLE
+insert into tbuser_role(user_id, role_id) values(1, 12);
+insert into tbuser_role(user_id, role_id) values(2, 11);
+insert into tbuser_role(user_id, role_id) values(3, 11);
+insert into tbuser_role(user_id, role_id) values(4, 11);
+insert into tbuser_role(user_id, role_id) values(5, 11);
+insert into tbuser_role(user_id, role_id) values(6, 11);
+insert into tbuser_role(user_id, role_id) values(7, 11);
+insert into tbuser_role(user_id, role_id) values(8, 11);
+insert into tbuser_role(user_id, role_id) values(9, 11);
+insert into tbuser_role(user_id, role_id) values(10, 12);
+
+
+
+
+

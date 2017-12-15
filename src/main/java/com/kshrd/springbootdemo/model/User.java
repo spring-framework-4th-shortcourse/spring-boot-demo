@@ -4,6 +4,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.List;
+
 public class User {
 	
 	private int id;
@@ -18,6 +20,8 @@ public class User {
 	//@NotEmpty(message = "Image can't be empty!")
 	private String image;
 
+	private List<Role> roles;
+
 	public User() {
 	}
 
@@ -27,6 +31,14 @@ public class User {
 		this.name = name;
 		this.gender = gender;
 		this.image = image;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	public int getId() {
