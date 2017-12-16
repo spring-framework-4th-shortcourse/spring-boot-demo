@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kshrd.springbootdemo.model.User;
 import com.kshrd.springbootdemo.repository.MybatisUserRepository;
@@ -23,12 +24,17 @@ public class UserServiceImpl implements UserService {
 	public User searchById(Integer id) {
 		return userRepository.findById(id);
 	}
-
+	
+	@Transactional
 	@Override
 	public void createUser(User user) {
 		boolean status = userRepository.save(user);
-		if (status)
+		if (status){
+			System.out.println("UserID: " + user.getId());
+			System.out.println("RoleId: " + user.getRoles().get(0).getId());
+			userRepository.saveUserRole(user.getId(), user.getRoles().get(0).getId());
 			System.out.println("-> Added Successfully!");
+		}
 		else
 			System.out.println("-> Added Fail!");
 	}

@@ -22,6 +22,7 @@
 					<th>Username</th>
 					<th>Gender</th>
 					<th>Thumbnail</th>
+					<th>Roles</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -32,6 +33,9 @@
 					<td th:text="${user.gender=='F'?'Female':'Male'}"></td>
 					<td>
 						<img th:src="${user.image}" width="100px"/>
+					</td>
+					<td>
+						<span th:each="role: ${user.roles}" th:text="${role.role}" class="label label-primary"></span>
 					</td>
 					<td>
 						<form th:action="@{/user/remove}" th:method="delete">

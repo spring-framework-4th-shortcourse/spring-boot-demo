@@ -1,5 +1,7 @@
 package com.kshrd.springbootdemo.model;
 
+import java.util.List;
+
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -17,7 +19,9 @@ public class User {
 
 	//@NotEmpty(message = "Image can't be empty!")
 	private String image;
-
+	
+	private List<Role> roles;
+	
 	public User() {
 	}
 
@@ -64,6 +68,14 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", gender=" + gender + ", image=" + image + "]";
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 }

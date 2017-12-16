@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kshrd.springbootdemo.model.User;
 import com.kshrd.springbootdemo.service.FileUploadService;
+import com.kshrd.springbootdemo.service.RoleService;
 import com.kshrd.springbootdemo.service.UserService;
 
 @Controller
@@ -42,17 +43,23 @@ public class UserController {
 		model.addAttribute("userdetail", user);
 		return "user/user-detail";
 	}
-		
+	
+	@Autowired
+	private RoleService roleService;
+	
 	@GetMapping("/user/add") //@RequestMapping(value = "/user/add")
 	public String userAddPage(Model model){
 		model.addAttribute("addStatus", true);
 		model.addAttribute("user", new User());
+		model.addAttribute("roles", roleService.getAllRoles());
+		
 		return "user/adduser";
 	}
 	
 	@PostMapping("/user/add")// = @RequestMapping(value = "/user/add", method = RequestMethod.POST)
 	public String actionAddUser(@RequestParam("file") MultipartFile file, Model model, 
 								@Valid User user, BindingResult result){
+		
 		if(result.hasErrors()){
 			for(FieldError error: result.getFieldErrors()){
 				System.out.println(error.getField() +": "+ error.getDefaultMessage());

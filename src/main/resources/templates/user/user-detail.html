@@ -26,6 +26,10 @@
 				<td><h2 th:text="*{gender=='F'?'Female':'Male'}"></h2></td>
 			</tr>
 			<tr>
+				<td><h2>Roles:</h2></td>
+				<td><h2><span class="label label-primary" th:each="r: *{roles}" th:text="${r.role}"></span></h2></td>
+			</tr>
+			<tr>
 				<td><h2>Image:</h2></td>
 				<td><h2 th:text="*{image}"></h2></td>
 			</tr>
