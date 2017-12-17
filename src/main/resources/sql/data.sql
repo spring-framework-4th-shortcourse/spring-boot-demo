@@ -8,14 +8,15 @@ insert into tbuser(id, name, gender, image) values(7, 'Carli Collier', 'M', 'htt
 
 --ROLE
 insert into tbrole(id, role) values(8, 'USER');
-insert into tbrole(id, role) values(9, 'ADMIN');
+insert into tbrole(id, role) values(9, 'DBA');
+insert into tbrole(id, role) values(10, 'ADMIN');
 
 --USER's ROLE
 insert into tbuser_role(user_id, role_id) values(1, 8);
 insert into tbuser_role(user_id, role_id) values(1, 9);
 insert into tbuser_role(user_id, role_id) values(2, 8);
-insert into tbuser_role(user_id, role_id) values(3, 8);
+insert into tbuser_role(user_id, role_id) values(3, 10);
 insert into tbuser_role(user_id, role_id) values(4, 9);
 insert into tbuser_role(user_id, role_id) values(5, 8);
-insert into tbuser_role(user_id, role_id) values(6, 8);
-insert into tbuser_role(user_id, role_id) values(7, 8);
+insert into tbuser_role(user_id, role_id) values(6, 10);
+insert into tbuser_role(user_id, role_id) values(7, 9);

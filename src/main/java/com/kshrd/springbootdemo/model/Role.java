@@ -5,6 +5,12 @@ public class Role {
 	private int id;
 	private String role;
 
+	
+	public Role(int id) {
+		super();
+		this.id = id;
+	}
+
 	public Role(String role) {
 		super();
 		this.role = role;

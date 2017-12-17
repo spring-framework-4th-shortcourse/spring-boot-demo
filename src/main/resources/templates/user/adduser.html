@@ -19,10 +19,7 @@
 				<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
 			</ul>
 			
-			<!-- <div class="form-group">
-				<label>Id:</label><input type="number" class="form-control" th:field="*{id}" placeholder="Enter Id"/>
-				<span class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">Error Id</span>
-			</div> -->
+			<input type="hidden" th:field="*{id}"/>
 			
 			<div class="form-group">
 				<label>Name: </label> <input type="text" class="form-control" th:field="*{name}" placeholder="Enter Username"/>
@@ -33,10 +30,25 @@
 				<span class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Error Gender</span>
 			</div>
 			<div class="form-group">
-				<label>Role:</label> 
-				<select name="roles[0].id" class="form-control">
-					<option th:each="r: ${roles}" th:value="${r.id}" th:text="${r.role}"></option>
+				<label>Role:</label>
+				
+				<select name="roleIds" th:if="${!addStatus}" multiple class="form-control" th:each="role: ${user.roles}">
+					<option th:each="r: ${roles}" th:selected="${role.id==r.id}" th:value="${r.id}" th:text="${r.role}"></option>
 				</select>
+				
+				<select name="roleIds" multiple th:if="${addStatus}" class="form-control">
+					  <option th:each="r: ${roles}" th:value="${r.id}" th:text="${r.role}"></option>
+				</select>
+				
+				<!-- 
+				<select name="roles[0].id" class="form-control" th:field="*{roles[0].id}">
+					<option th:each="r: ${roles}" th:value="${r.id}" th:text="${r.role}"></option>
+					 
+					<option th:each="r: ${roles}" th:if="${!addStatus}" th:selected="${r.id==user.roles[0].id}"  th:value="${r.id}" th:text="${r.role}"></option>
+					<option th:each="r: ${roles}" th:if="${addStatus}" th:value="${r.id}" th:text="${r.role}"></option> 
+					
+				</select>
+				 -->
 			</div>
 			<div class="form-group">
 				<label>Image:</label> 

@@ -1,5 +1,6 @@
 package com.kshrd.springbootdemo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kshrd.springbootdemo.model.Role;
 import com.kshrd.springbootdemo.model.User;
 import com.kshrd.springbootdemo.service.FileUploadService;
 import com.kshrd.springbootdemo.service.RoleService;
@@ -57,7 +59,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/add")// = @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-	public String actionAddUser(@RequestParam("file") MultipartFile file, Model model, 
+	public String actionAddUser(@RequestParam("file") MultipartFile file,
+								@RequestParam(value="roleIds", required=false, defaultValue="8") Integer[] roleIds,
+								Model model, 
 								@Valid User user, BindingResult result){
 		
 		if(result.hasErrors()){
@@ -66,8 +70,18 @@ public class UserController {
 			}
 			model.addAttribute("addStatus", true);
 			model.addAttribute("user", user);
+			model.addAttribute("roles", roleService.getAllRoles());
+			
 			return "/user/adduser"; 
 		}
+		
+		//set roleIds to user's role
+		List<Role> roles = new ArrayList<>();;
+		for(Integer rId: roleIds){
+			roles.add(new Role(rId));
+		}
+		user.setRoles(roles);
+		
 		System.out.println("file: " + file.getOriginalFilename());
 		String filePath = fileUploadService.upload(file);
 		user.setImage(filePath);
@@ -90,12 +104,15 @@ public class UserController {
 		User user = userService.searchById(id);
 		model.addAttribute("user", user);
 		model.addAttribute("addStatus", false);
+		model.addAttribute("roles", roleService.getAllRoles());
 		return "user/adduser";
 	}
 	
 	@PostMapping("/user/update") //@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public String updateUser(@RequestParam("file") MultipartFile file, 
+							@RequestParam("roleIds") String roleIds, 
 						Model model, @Valid User user, BindingResult result){
+		System.out.println(roleIds);
 		if(result.hasErrors()){
 			for(FieldError error: result.getFieldErrors()){
 				System.out.println(error.getField() +": "+ error.getDefaultMessage());

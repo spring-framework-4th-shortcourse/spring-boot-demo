@@ -13,7 +13,6 @@ import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-import com.kshrd.springbootdemo.model.Role;
 import com.kshrd.springbootdemo.model.User;
 
 @Repository
@@ -25,17 +24,14 @@ public interface MybatisUserRepository {
 		@Result(property = "name", column = "name"),
 		@Result(property = "gender", column = "gender"),
 		@Result(property = "image", column = "image"),
-		@Result(property = "roles", column = "id", many = @Many(select = "findRolesByUserId"))
+		@Result(property = "roles", column = "id", many = @Many(select = "com.kshrd.springbootdemo.repository.RoleRepository.findRolesByUserId"))
 	})
 	public List<User> findAll();
 	
-	@Select("select r.id, r.role from tbrole r inner join tbuser_role ur on r.id=ur.role_id where ur.user_id=#{id}")
-	public List<Role> findRolesByUserId(int id);
-
 	@Select("select id, name, gender, image from tbuser where id=#{id}")
 	@Results({
 		@Result(property = "id", column = "id"),
-		@Result(property = "roles", column = "id", many = @Many(select = "findRolesByUserId"))
+		@Result(property = "roles", column = "id", many = @Many(select = "com.kshrd.springbootdemo.repository.RoleRepository.findRolesByUserId"))
 	})
 	public User findById(Integer id);
 
@@ -51,5 +47,9 @@ public interface MybatisUserRepository {
 
 	@Update("update tbuser set name=#{name}, gender=#{gender}, image=#{image} where id=#{id}")
 	public boolean update(User user);
+	
+	@Update("update tbuser_role set role_id=#{role_id} where user_id=#{user_id}")
+	public boolean updateUserRoleByUserId(@Param("user_id") int userId, @Param("role_id") int roleId);
+	
 	
 }
