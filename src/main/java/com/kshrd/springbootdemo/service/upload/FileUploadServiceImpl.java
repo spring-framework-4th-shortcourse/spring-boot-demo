@@ -1,4 +1,4 @@
-package com.kshrd.springbootdemo.service;
+package com.kshrd.springbootdemo.service.upload;
 
 import java.io.IOException;
 import java.nio.file.Files;

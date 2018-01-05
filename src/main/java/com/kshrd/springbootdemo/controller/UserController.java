@@ -19,9 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kshrd.springbootdemo.model.Role;
 import com.kshrd.springbootdemo.model.User;
-import com.kshrd.springbootdemo.service.FileUploadService;
 import com.kshrd.springbootdemo.service.RoleService;
 import com.kshrd.springbootdemo.service.UserService;
+import com.kshrd.springbootdemo.service.upload.FileUploadService;
 
 @Controller
 public class UserController {
@@ -110,8 +110,11 @@ public class UserController {
 	
 	@PostMapping("/user/update") //@RequestMapping(value = "/user/update", method = RequestMethod.POST)
 	public String updateUser(@RequestParam("file") MultipartFile file, 
-							@RequestParam("roleIds") String roleIds, 
-						Model model, @Valid User user, BindingResult result){
+							 @RequestParam(value="roleIds", required=false, defaultValue="8") Integer[] roleIds, 
+							 Model model, 
+							 @Valid User user, 
+							 BindingResult result){
+		
 		System.out.println(roleIds);
 		if(result.hasErrors()){
 			for(FieldError error: result.getFieldErrors()){
@@ -127,6 +130,13 @@ public class UserController {
 			String filePath = fileUploadService.upload(file);
 			user.setImage(filePath);
 		}
+		
+		//set roleIds to user's role
+		List<Role> roles = new ArrayList<>();;
+		for(Integer rId: roleIds){
+			roles.add(new Role(rId));
+		}
+		user.setRoles(roles);
 		
 		System.out.println(user);
 		userService.updateUser(user);

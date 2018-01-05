@@ -48,10 +48,19 @@ public class UserServiceImpl implements UserService {
 			System.out.println("-> Remove Fail!");
 	}
 
+	@Transactional
 	@Override
 	public void updateUser(User user) {
+		//update user's info
 		if (userRepository.update(user)){
-			userRepository.updateUserRoleByUserId(user.getId(), user.getRoles().get(0).getId());
+			
+			//remove all user's role from table tbuser_role
+			userRepository.removeUserRoleByUserId(user.getId());
+
+			//add new user's role
+			for(Role role: user.getRoles()){
+				userRepository.saveUserRole(user.getId(), role.getId());
+			}
 			System.out.println("-> Updated Successfully!");
 		}
 		else

@@ -1,4 +1,4 @@
-package com.kshrd.springbootdemo.service;
+package com.kshrd.springbootdemo.service.upload;
 
 import org.springframework.web.multipart.MultipartFile;
 

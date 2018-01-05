@@ -51,5 +51,7 @@ public interface MybatisUserRepository {
 	@Update("update tbuser_role set role_id=#{role_id} where user_id=#{user_id}")
 	public boolean updateUserRoleByUserId(@Param("user_id") int userId, @Param("role_id") int roleId);
 	
+	@Delete("delete from tbuser_role where user_id=#{userId}")
+	public boolean removeUserRoleByUserId(Integer userId);
 	
 }
