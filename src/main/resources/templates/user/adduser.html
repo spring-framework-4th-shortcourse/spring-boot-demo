@@ -30,37 +30,64 @@
 				<span class="error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Error Gender</span>
 			</div>
 			<div class="form-group">
-				<label>Role:</label>
-				
-				<select name="roleIds" th:if="${!addStatus}" multiple class="form-control" th:each="role: ${user.roles}">
-					<option th:each="r: ${roles}" th:selected="${role.id==r.id}" th:value="${r.id}" th:text="${r.role}"></option>
+				<label>Role:</label><br/>
+				<select class="selectpicker" multiple>
+				  	<option th:each="r: ${roles}" th:value="${r.id}" th:text="${r.role}"></option>
 				</select>
+				<input type="hidden" name="roleIds" id="roleIds"/> 
 				
-				<select name="roleIds" multiple th:if="${addStatus}" class="form-control">
-					  <option th:each="r: ${roles}" th:value="${r.id}" th:text="${r.role}"></option>
-				</select>
-				
-				<!-- 
-				<select name="roles[0].id" class="form-control" th:field="*{roles[0].id}">
-					<option th:each="r: ${roles}" th:value="${r.id}" th:text="${r.role}"></option>
-					 
-					<option th:each="r: ${roles}" th:if="${!addStatus}" th:selected="${r.id==user.roles[0].id}"  th:value="${r.id}" th:text="${r.role}"></option>
-					<option th:each="r: ${roles}" th:if="${addStatus}" th:value="${r.id}" th:text="${r.role}"></option> 
-					
-				</select>
-				 -->
 			</div>
 			<div class="form-group">
 				<label>Image:</label> 
 				<input type="file" name="file"/>
 				<input type="hidden" class="form-control" th:field="*{image}" placeholder="Enter Image"/>
-				<!-- <span class="error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}">Error Image</span> -->
 			</div>
 			<div class="pull-right">
 				<a href="/" class="btn btn-default">Cancel</a>
 				<button type="submit" class="btn btn-primary" th:text="${addStatus==true?'Create User': 'Update User'}">Create User</button>
 			</div>
 		</form>
+	
 	</div>
+	
+	<th:block layout:fragment="myScript">
+	
+		<!--bootstrap select  -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+				
+		<script th:inline="javascript">
+			$(document).ready(function(){
+				
+				//get addStatus from model
+				var isAdd = [[${addStatus}]];
+				
+				//initialize bootstrap select
+				$('.selectpicker').selectpicker();
+				
+				//listen when role change
+				$('select.selectpicker').change(function(){
+					//get selected roles
+					var roleIds = $('.selectpicker').val();
+					//
+					$('input#roleIds').val(roleIds);
+				});
+				
+				//will work if we're in update mode
+				if(isAdd == false){ 
+					//get user's roles
+					var roles = [[${user.roles}]];
+					var arrRoles = [];
+					roles.forEach(function(role){
+						arrRoles.push(role.id);
+					});
+					//set selected
+					$('.selectpicker').selectpicker('val', arrRoles);
+				}
+			});
+		</script>
+		
+	</th:block>
+	
 </body>
 </html>

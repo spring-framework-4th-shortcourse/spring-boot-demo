@@ -1,5 +1,6 @@
 package com.kshrd.springbootdemo.service.upload;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +19,12 @@ public class FileUploadServiceImpl implements FileUploadService{
 		System.out.println(file);
 		if(file.isEmpty())
 			return null;
+		
+		//TODO: create folder if not exist
+		File folder = new File(UPLOADED_FOLDER);
+		if(!folder.exists()){
+			folder.mkdir();
+		}
 		
 		String fileName = null;
 		try {
