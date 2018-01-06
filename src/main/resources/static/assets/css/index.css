@@ -14,3 +14,9 @@ h1{
 	color: #fff;
 	text-align: center;
 }
+
+.nav>li>a{
+	position: relative;
+    display: block;
+	padding: 15px 5px;
+}

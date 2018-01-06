@@ -1,12 +1,18 @@
-<nav class="navbar navbar-default" xmlns:th="http://wwww.thymeleaf.org" th:fragment="header">
+<nav class="navbar navbar-default" th:fragment="header"
+ 		xmlns:th="http://www.thymeleaf.org"
+ 		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+ 	
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="/">User Management System</a>
+			<a class="navbar-brand" href="/"><span class="label label-default">User Management System</span></a>
 		</div>
-		<ul class="nav navbar-nav">
-			<li class="active"><a href="/">Home</a></li>
-			<li><a href="/user/add">Create User</a></li>
-			<li><a href="#">Logout</a></li>
+		<ul class="nav navbar-nav pull-right" sec:authorize="isAuthenticated()">
+			<li><a href="#"><span class="label label-primary">Hi, <span sec:authentication="name"></span></span></a></li>
+			<li><a href="/logout"><span class="label label-warning">Logout</span></a></a></li>
+		</ul>
+		
+		<ul class="nav navbar-nav pull-right" sec:authorize="isAnonymous()">
+			<li><a><span class="label label-primary">Version 1.0</span></a></li>
 		</ul>
 	</div>
 </nav>
