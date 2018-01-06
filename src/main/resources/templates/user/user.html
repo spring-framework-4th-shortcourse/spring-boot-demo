@@ -6,14 +6,17 @@
 <head>
 	<meta charset="utf-8">
 	<title>User List</title>
-	<link rel="stylesheet" href="/css/user.css"/>
+	<link rel="stylesheet" href="/assets/css/user.css"/>
 </head>
 
 <body>
 	<div class="container" layout:fragment="content">
 		<div class="alert alert-info">
-			<h2 th:text="#{Page.user.user.title}">User List</h2><hr/>
-			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" href="/user/add">Create User</a>
+			<h2 th:text="#{Page.user.user.title}">User List</h2>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<hr/>
+				<a class="btn btn-primary" href="/user/add">Create User</a>
+			</div>
 		</div>
 		<table class="table table-striped">
 			<thead>
@@ -21,7 +24,6 @@
 					<th>No</th>
 					<th>Username</th>
 					<th>Gender</th>
-					<th>Thumbnail</th>
 					<th>Roles</th>
 					<th>Action</th>
 				</tr>
@@ -31,9 +33,6 @@
 					<td th:text="${userStat.index+1}">1</td>
 					<td th:text="${user.name}">A</td>
 					<td th:text="${user.gender=='F'?'Female':'Male'}"></td>
-					<td>
-						<img th:src="${user.image}" width="100px"/>
-					</td>
 					<td>
 						<span th:each="role: ${user.roles}" th:text="${role.role}" class="label label-primary"></span>
 					</td>
@@ -50,12 +49,27 @@
 					</td>
 				</tr>
 			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="5">
+						<ul class="pager">
+							<li><a href="#">Previous</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">Next</a></li>
+						</ul>
+					</td>
+				</tr>
+			</tfoot>
 		</table>
 	</div>
 	
 	<th:block layout:fragment="myScript">
 	
-		<script src="/js/script.js"></script>
+		<script src="/assets/js/script.js"></script>
 		
 		<script>
 			console.log('Hello from inline script!');

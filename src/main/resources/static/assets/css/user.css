@@ -1,0 +1,4 @@
+.pager li.active > a, .pager li.active > span {
+    background-color: #eee;
+    pointer-events: none;
+}
