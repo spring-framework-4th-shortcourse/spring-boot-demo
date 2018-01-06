@@ -12,7 +12,7 @@
 	<div class="container" layout:fragment="content">
 		<div class="alert alert-info">
 			<h2 th:text="#{Page.user.user.title}">User List</h2><hr/>
-			<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-primary" href="/user/add">Create User</a>
+			<a class="btn btn-primary" href="/user/add">Create User</a>
 		</div>
 		<table class="table table-striped">
 			<thead>
@@ -40,11 +40,11 @@
 						<form th:action="@{/user/remove}" th:method="delete">
 							<!-- <input type="hidden" name="_method" value="DELETE"> -->
 							<a class="btn btn-default" th:href="@{/user/{id}(id=${user.id})}">View</a>
-							<span sec:authorize="hasRole('ROLE_ADMIN')">
+							<span>
 								<input type="hidden" name="id" th:value="${user.id}"/>
 								<input class="btn btn-danger" type="submit" value="Remove"/>
 							</span>
-							<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-warning" th:href="@{/user/edit(id=${user.id})}">Edit</a>
+							<a class="btn btn-warning" th:href="@{/user/edit(id=${user.id})}">Edit</a>
 						</form>
 					</td>
 				</tr>

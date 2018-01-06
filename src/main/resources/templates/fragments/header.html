@@ -6,12 +6,12 @@
 		<div class="navbar-header">
 			<a class="navbar-brand" href="/"><span class="label label-default">User Management System</span></a>
 		</div>
-		<ul class="nav navbar-nav pull-right" sec:authorize="isAuthenticated()">
-			<li><a href="#"><span class="label label-primary">Hi, <span sec:authentication="name"></span></span></a></li>
-			<li><a href="/logout"><span class="label label-warning">Logout</span></a></a></li>
+		<ul class="nav navbar-nav pull-right">
+			<li><a href="#"><span class="label label-primary">Hi, Username</span></a></li>
+			<li><a href="/logout"><span class="label label-warning">Logout</span></a></li>
 		</ul>
 		
-		<ul class="nav navbar-nav pull-right" sec:authorize="isAnonymous()">
+		<ul class="nav navbar-nav pull-right">
 			<li><a><span class="label label-primary">Version 1.0</span></a></li>
 		</ul>
 	</div>

@@ -14,11 +14,9 @@
 		<!-- <h1>Render content here!!!</h1> -->
 	</div>
 	
-	<div sec:authorize="isAuthenticated()">
-		<!--Footer-->
-		<footer class="page-footer" th:replace="fragments/footer"></footer>
-		<!--/Footer-->
-	</div>
+	<!--Footer-->
+	<footer class="page-footer" th:replace="fragments/footer"></footer>
+	<!--/Footer-->
 	
 	<th:block th:replace="fragments/script"></th:block>
 	
