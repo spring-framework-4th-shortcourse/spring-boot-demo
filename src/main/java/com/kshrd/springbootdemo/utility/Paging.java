@@ -1,10 +1,11 @@
 package com.kshrd.springbootdemo.utility;
 
+@SuppressWarnings("unused")
 public class Paging {
 	
 	private int page;
 	private int limit;
-
+	
 	private int nextPage;
 	private int previousPage;
 	
@@ -18,7 +19,7 @@ public class Paging {
 	private int offset;
 
 	public Paging() {
-		this(1, 10, 0, 0, 5);
+		this(1, 2, 0, 0, 3);
 	}
 	public Paging(int page, int limit, int totalCount, int totalPages, int pagesToShow) {
 		this.page = page;
@@ -107,10 +108,12 @@ public class Paging {
 			endPage = page + halfPagesToShow;
 		}
 	}
-	
 	@Override
 	public String toString() {
-		return "Paging [page=" + page + ", limit=" + limit + ", totalCount=" + totalCount + ", totalPages=" + totalPages
-				+ ", nextPage=" + nextPage + ", previousPage=" + previousPage + ", offset=" + offset + "]";
+		return "Paging [page=" + getPage() + ", limit=" + getLimit() + ", totalPages=" + getTotalPages()
+				+ ", offset=" + getOffset() + ", nextPage=" + getNextPage() + ", previousPage="
+				+ getPreviousPage() + ", startPage=" + getStartPage() + ", endPage=" + getEndPage()
+				+ ", pageToShow=" + getPagesToShow() + ", totalCount=" + getTotalCount() + "]";
 	}
+	
 }

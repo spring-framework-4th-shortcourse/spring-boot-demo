@@ -22,6 +22,7 @@ import com.kshrd.springbootdemo.model.User;
 import com.kshrd.springbootdemo.service.RoleService;
 import com.kshrd.springbootdemo.service.UserService;
 import com.kshrd.springbootdemo.service.upload.FileUploadService;
+import com.kshrd.springbootdemo.utility.Paging;
 
 @Controller
 public class UserController {
@@ -32,14 +33,17 @@ public class UserController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
-	@GetMapping(value = {"/", "/user"}) // = @RequestMapping(value = "/user")
-	public String userPage(Model model){
-		List<User> users = userService.findAllUsers();
+	@GetMapping(value = {"/", "/user"})
+	public String userPage(Paging paging, Model model){
+		List<User> users = userService.findWithPagination(paging);
+		
+		System.out.println(paging);
 		model.addAttribute("users", users);
+		model.addAttribute("paging", paging);
 		return "user/user";
 	}
 	
-	@GetMapping("/user/{id}") //@RequestMapping(value="/user/{id}")
+	@GetMapping("/user/{id}")
 	public String userDetail(@PathVariable("id") Integer id, Model model){
 		User user = userService.searchById(id);
 		model.addAttribute("userdetail", user);
@@ -58,7 +62,7 @@ public class UserController {
 		return "user/adduser";
 	}
 	
-	@PostMapping("/user/add")// = @RequestMapping(value = "/user/add", method = RequestMethod.POST)
+	@PostMapping("/user/add")
 	public String actionAddUser(@RequestParam("file") MultipartFile file,
 								@RequestParam(value="roleIds", required=false, defaultValue="8") Integer[] roleIds,
 								Model model, 
@@ -98,7 +102,7 @@ public class UserController {
 		return "redirect:/user";
 	}
 	
-	@GetMapping("/user/edit") //@RequestMapping(value = "/user/edit")
+	@GetMapping("/user/edit")
 	public String editUser(Model model, @RequestParam("id") Integer id){
 		System.out.println("Id: " + id);
 		User user = userService.searchById(id);
@@ -108,7 +112,7 @@ public class UserController {
 		return "user/adduser";
 	}
 	
-	@PostMapping("/user/update") //@RequestMapping(value = "/user/update", method = RequestMethod.POST)
+	@PostMapping("/user/update") 
 	public String updateUser(@RequestParam("file") MultipartFile file, 
 							 @RequestParam(value="roleIds", required=false, defaultValue="8") Integer[] roleIds, 
 							 Model model, 

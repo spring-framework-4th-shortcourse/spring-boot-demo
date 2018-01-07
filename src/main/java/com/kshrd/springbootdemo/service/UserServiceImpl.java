@@ -9,17 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kshrd.springbootdemo.model.Role;
 import com.kshrd.springbootdemo.model.User;
 import com.kshrd.springbootdemo.repository.MybatisUserRepository;
+import com.kshrd.springbootdemo.utility.Paging;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private MybatisUserRepository userRepository;
-
-	@Override
-	public List<User> findAllUsers() {
-		return userRepository.findAll();
-	}
 
 	@Override
 	public User searchById(Integer id) {
@@ -65,6 +61,13 @@ public class UserServiceImpl implements UserService {
 		}
 		else
 			System.out.println("-> Update Fail!");
+	}
+
+	@Override
+	public List<User> findWithPagination(Paging paging) {
+		Integer totalCount = userRepository.countUser();
+		paging.setTotalCount(totalCount);
+		return userRepository.findWithPagination(paging);
 	}
 
 }

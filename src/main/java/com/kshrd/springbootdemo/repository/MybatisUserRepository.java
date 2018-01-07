@@ -14,11 +14,12 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.kshrd.springbootdemo.model.User;
+import com.kshrd.springbootdemo.utility.Paging;
 
 @Repository
 public interface MybatisUserRepository {
 
-	@Select("select id, name, gender, image from tbuser")
+	@Select("select id, name, gender, image from tbuser limit #{limit} offset #{offset}")
 	@Results({
 		@Result(property = "id", column = "id"),
 		@Result(property = "name", column = "name"),
@@ -26,7 +27,10 @@ public interface MybatisUserRepository {
 		@Result(property = "image", column = "image"),
 		@Result(property = "roles", column = "id", many = @Many(select = "com.kshrd.springbootdemo.repository.RoleRepository.findRolesByUserId"))
 	})
-	public List<User> findAll();
+	public List<User> findWithPagination(Paging paging);
+	
+	@Select("select count(*) from tbuser")
+	public Integer countUser();
 	
 	@Select("select id, name, gender, image from tbuser where id=#{id}")
 	@Results({

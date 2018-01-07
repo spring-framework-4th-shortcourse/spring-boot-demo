@@ -53,13 +53,17 @@
 				<tr>
 					<td colspan="5">
 						<ul class="pager">
-							<li><a href="#">Previous</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">Next</a></li>
+							<!-- <li><a th:href="@{/user(page=1)}">←</a></li> -->
+							
+							<li><a th:href="@{/user(page=${paging.previousPage})}">«</a></li>
+
+							<li th:each="i: ${#numbers.sequence(paging.startPage, paging.endPage)}" th:class="${paging.page==i?'active':''}">
+								<a th:href="@{/user(page=${i})}" th:text="${i}">1</a>
+							</li>
+							
+							<li><a th:href="@{/user(page=${paging.nextPage})}">»</a></li>
+							
+							<!-- <li><a th:href="@{/user(page=${paging.totalPages})}">→</a></li> -->
 						</ul>
 					</td>
 				</tr>

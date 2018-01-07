@@ -16,6 +16,4 @@ public interface RoleRepository {
 	@Select("select r.id, r.role from tbrole r inner join tbuser_role ur on r.id=ur.role_id where ur.user_id=#{id}")
 	public List<Role> findRolesByUserId(int id);
 	
-	
-	
 }

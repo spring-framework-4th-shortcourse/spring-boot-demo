@@ -12,15 +12,5 @@ import com.kshrd.springbootdemo.repository.MybatisUserRepository;
 @SpringBootTest
 public class SpringBootDemoApplicationTests {
 	
-	@Autowired
-	MybatisUserRepository repo;
-	
-	@Test
-	public void contextLoads() {
-		repo.findAll().forEach(u->{
-			System.out.println(u);
-			System.out.println(u.getRoles());
-		});
-	}
 
 }
