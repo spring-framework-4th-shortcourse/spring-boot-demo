@@ -19,7 +19,7 @@ public class Paging {
 	private int offset;
 
 	public Paging() {
-		this(1, 2, 0, 0, 3);
+		this(1, 5, 0, 0, 3);
 	}
 	public Paging(int page, int limit, int totalCount, int totalPages, int pagesToShow) {
 		this.page = page;
