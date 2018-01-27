@@ -13,7 +13,7 @@ public interface RoleRepository {
 	@Select("select r.id, r.role from tbrole r")
 	public List<Role> findAll();
 	
-	@Select("select r.id, r.role from tbrole r inner join tbuser_role ur on r.id=ur.role_id where ur.user_id=#{id}")
-	public List<Role> findRolesByUserId(int id);
+	@Select("select r.id, r.role from tbrole r where r.id=#{id}")
+	public Role findRoleById(Integer id);
 	
 }

@@ -24,32 +24,34 @@ public class UserServiceImpl implements UserService {
 	
 	@Transactional
 	@Override
-	public void createUser(User user) {
+	public boolean createUser(User user) {
 		boolean status = userRepository.save(user);
 		if (status){
 			for(Role role: user.getRoles()){
 				userRepository.saveUserRole(user.getId(), role.getId());
 			}
-			System.out.println("-> Added Successfully!");
 		}
-		else
-			System.out.println("-> Added Fail!");
+		return status;
 	}
 
 	@Override
-	public void removeUser(Integer id) {
-		if (userRepository.remove(id))
+	public boolean removeUser(Integer id) {
+		boolean status = userRepository.remove(id); 
+		if (status)
 			System.out.println("-> Removed Successfully!");
 		else
 			System.out.println("-> Remove Fail!");
+		
+		return status;
+		
 	}
 
 	@Transactional
 	@Override
-	public void updateUser(User user) {
+	public boolean updateUser(User user) {
+		boolean status = userRepository.update(user);
 		//update user's info
-		if (userRepository.update(user)){
-			
+		if (status){
 			//remove all user's role from table tbuser_role
 			userRepository.removeUserRoleByUserId(user.getId());
 
@@ -61,6 +63,8 @@ public class UserServiceImpl implements UserService {
 		}
 		else
 			System.out.println("-> Update Fail!");
+		
+		return status;
 	}
 
 	@Override

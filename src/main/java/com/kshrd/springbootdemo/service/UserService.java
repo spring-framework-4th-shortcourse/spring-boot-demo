@@ -9,11 +9,11 @@ public interface UserService {
 
 	public User searchById(Integer id);
 
-	public void createUser(User user);
+	public boolean createUser(User user);
 
-	public void removeUser(Integer id);
+	public boolean removeUser(Integer id);
 
-	public void updateUser(User user);
+	public boolean updateUser(User user);
 	
 	public List<User> findWithPagination(Paging paging);
 	
